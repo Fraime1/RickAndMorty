@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">R&amp;M</string>
+    <string name="name">Name:</string>
+    <string name="race">Species:</string>
+    <string name="gender">Gender:</string>
+    <string name="status">Status:</string>
+    <string name="location">Location:</string>
+    <string name="episode">Episodes:</string>
+
+
+</resources>
