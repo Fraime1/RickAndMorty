@@ -5,5 +5,6 @@
 Реализованна пагинация.
 
 Использовал для связи с DataBinding и PagingSource LiveData
+Ответ HTTP запроса десериализировал в JSON
 
 Стек: Kotlin, Jetpack Navigation, Jetpack Paging3, Picasso, MVVM, Clean(Старался по крайней мере), Koin, Retrofit 2, GSON, Databinding, ViewModel from lifecycle-extentions
