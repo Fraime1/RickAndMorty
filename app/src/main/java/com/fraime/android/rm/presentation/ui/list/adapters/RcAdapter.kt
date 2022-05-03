@@ -1,23 +1,20 @@
-package com.fraime.android.rm.presentation.ui.list
+package com.fraime.android.rm.presentation.ui.list.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
-import androidx.paging.PagingData
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.fraime.android.rm.R
 import com.fraime.android.rm.databinding.FragmentListItemBinding
 import com.fraime.android.rm.domain.model.Character
+import com.fraime.android.rm.presentation.ui.list.ListItemViewModel
 import com.squareup.picasso.Picasso
 
 class RcAdapter(
@@ -44,10 +41,7 @@ class RcAdapter(
         }
 
         override fun onClick(v: View?) {
-            navController.navigate(
-                R.id.action_listFragment_to_detailsFragment,
-                bundleOf(ID_KEY to binding.viewModel?.id?.value)
-            )
+            binding.viewModel?.toDetails(navController, binding.viewModel?.id?.value)
         }
 
     }
@@ -66,7 +60,7 @@ class RcAdapter(
     }
 
     override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
-        holder.bind(getItem(position)!!)
+        getItem(position)?.let { holder.bind(it) }
     }
 
     companion object {

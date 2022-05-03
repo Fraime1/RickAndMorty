@@ -4,17 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fraime.android.rm.R
 import com.fraime.android.rm.databinding.FragmentListBinding
-import kotlinx.coroutines.launch
+import com.fraime.android.rm.presentation.ui.list.adapters.CharacterLoadStateAdapter
+import com.fraime.android.rm.presentation.ui.list.adapters.RcAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ListFragment : Fragment() {
@@ -34,7 +34,11 @@ class ListFragment : Fragment() {
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
         }
-        binding.recyclerView.adapter = adapter
+        binding.recyclerView.adapter = adapter.withLoadStateFooter(CharacterLoadStateAdapter())
+        adapter.addLoadStateListener { state: CombinedLoadStates ->
+            binding.recyclerView.isVisible = state.refresh != LoadState.Loading
+            binding.progress.isVisible = state.refresh == LoadState.Loading
+        }
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }

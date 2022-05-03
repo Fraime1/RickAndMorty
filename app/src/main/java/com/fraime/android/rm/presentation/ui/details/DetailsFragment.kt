@@ -8,7 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.fraime.android.rm.R
 import com.fraime.android.rm.databinding.FragmentDetailsBinding
-import com.fraime.android.rm.presentation.ui.list.RcAdapter
+import com.fraime.android.rm.presentation.ui.list.adapters.RcAdapter
 import com.squareup.picasso.Picasso
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -20,7 +20,7 @@ class DetailsFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_details, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = detailsViewModel
